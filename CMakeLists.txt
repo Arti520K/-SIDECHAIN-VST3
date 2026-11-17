@@ -14,7 +14,7 @@ FetchContent_Declare(
     GIT_SHALLOW TRUE
 )
 FetchContent_MakeAvailable(JUCE)
-juce_generate_juce_header(SIDECHAIN_PRO)
+
 juce_add_plugin(SIDECHAIN_PRO
     COMPANY_NAME "Arti520K"
     BUNDLE_ID "com.arti520k.sidechainpro"
@@ -30,7 +30,7 @@ juce_add_plugin(SIDECHAIN_PRO
     EDITOR_WANTS_KEYBOARD_FOCUS FALSE
     COPY_PLUGIN_AFTER_BUILD FALSE
 )
-
+juce_generate_juce_header(SIDECHAIN_PRO)
 target_sources(SIDECHAIN_PRO PRIVATE
     PluginProcessor.cpp
     PluginEditor.cpp
