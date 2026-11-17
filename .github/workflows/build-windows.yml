@@ -1,1 +1,35 @@
 
+name: Build Windows VST3
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure
+        run: cmake -S . -B build -A x64 -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build VST3
+        run: cmake --build build --config Release --parallel 2
+
+      - name: Package VST3
+        shell: pwsh
+        run: |
+          $plugin = Get-ChildItem -Path "build" -Recurse -Directory -Filter "*.vst3" | Select-Object -First 1
+          if (-not $plugin) { throw "VST3 bundle was not found after build." }
+          Compress-Archive -Path $plugin.FullName -DestinationPath "SIDECHAIN_PRO_Windows_x64_VST3.zip" -Force
+
+      - name: Upload plugin artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SIDECHAIN-PRO-Windows-x64-VST3
+          path: SIDECHAIN_PRO_Windows_x64_VST3.zip
+          if-no-files-found: error
+          retention-days: 14
