@@ -32,8 +32,8 @@ juce_add_plugin(SIDECHAIN_PRO
 )
 
 target_sources(SIDECHAIN_PRO PRIVATE
-    Source/PluginProcessor.cpp
-    Source/PluginEditor.cpp
+    PluginProcessor.cpp
+    PluginEditor.cpp
 )
 
 target_compile_definitions(SIDECHAIN_PRO PUBLIC
