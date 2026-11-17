@@ -14,7 +14,7 @@ FetchContent_Declare(
     GIT_SHALLOW TRUE
 )
 FetchContent_MakeAvailable(JUCE)
-
+juce_generate_juce_header(SIDECHAIN_PRO)
 juce_add_plugin(SIDECHAIN_PRO
     COMPANY_NAME "Arti520K"
     BUNDLE_ID "com.arti520k.sidechainpro"
